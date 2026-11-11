@@ -1,0 +1,25 @@
+# 边界/反向用例测试数据（L2/L4 引用）
+login:
+  boundary:
+    - name: empty_username
+      username: ""
+      password: "123456"
+      expect_code: 1001        # 空用户名查不到用户
+    - name: empty_password
+      username: user1
+      password: ""
+      expect_code: 1002        # 密码哈希不匹配
+    - name: long_username
+      username: "a"
+      expect_code: 1001
+  invalid:
+    - username: "nobody_xyz"
+      password: "123456"
+      expect_code: 1001
+    - username: user1
+      password: "wrongpass"
+      expect_code: 1002
+
+battle:
+  nonexistent_room: 999999
+  fake_token: "fake-token-not-in-redis"

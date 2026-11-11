@@ -47,6 +47,8 @@ core
 core.*
 runtime/
 data/
+# 测试夹具数据目录（用例引用，须入库；其余 data/ 运行数据仍忽略）
+!08_测试/qa-automation/data/
 uploads/
 
 # ===== 测试报告生成产物（可由用例重新生成）=====

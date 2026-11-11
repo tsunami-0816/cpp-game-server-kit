@@ -1,0 +1,19 @@
+syntax = "proto3";
+package game;
+
+// === 登录（TCP 网关 8001）===
+message LoginReq  { string username = 1; string password = 2; }
+message LoginRsp  { int32 code = 1; string token = 2; int64 uid = 3; string msg = 4; }
+
+// === 房间（KCP 战斗服 8002）===
+message CreateRoomReq { string token = 1; int64 uid = 2; }
+message CreateRoomRsp { int32 code = 1; int64 room_id = 2; string msg = 3; }
+
+message JoinRoomReq   { string token = 1; int64 room_id = 2; int64 uid = 3; }
+message JoinRoomRsp   { int32 code = 1; repeated int64 members = 2; string msg = 3; }
+
+message FrameInput    { int64 room_id = 1; int64 uid = 2; int32 input = 3; }
+message FrameBroadcast{ int64 room_id = 1; int32 frame_no = 2; repeated FrameInput inputs = 3; }
+
+message RejoinRoomReq { string token = 1; int64 room_id = 2; int64 uid = 3; }
+message RejoinRoomRsp { int32 code = 1; int32 frame_no = 2; repeated FrameInput history = 3; string msg = 4; }

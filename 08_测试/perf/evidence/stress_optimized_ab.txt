@@ -1,0 +1,42 @@
+----- optimized round 1 -----
+[stress] target=127.0.0.1:8000 conn=1000 duration=10s
+[stress] connected=1000/1000
+=== stress_client 压测结果 ===
+成功连接: 1000
+中途断开: 0
+当前在线: 1000
+发包总数: 931000
+收包总数: 930162
+耗时: 10.0005 s
+QPS: 93011 回显/s
+平均延迟: 10.306 ms
+最大延迟: 24.544 ms
+客户端 RSS: 3.67969 MB
+----- optimized round 2 -----
+[stress] target=127.0.0.1:8000 conn=1000 duration=10s
+[stress] connected=1000/1000
+=== stress_client 压测结果 ===
+成功连接: 1000
+中途断开: 0
+当前在线: 1000
+发包总数: 856000
+收包总数: 855998
+耗时: 10.002 s
+QPS: 85582 回显/s
+平均延迟: 11.146 ms
+最大延迟: 17.721 ms
+客户端 RSS: 3.65625 MB
+----- optimized round 3 -----
+[stress] target=127.0.0.1:8000 conn=1000 duration=10s
+[stress] connected=1000/1000
+=== stress_client 压测结果 ===
+成功连接: 1000
+中途断开: 0
+当前在线: 1000
+发包总数: 953000
+收包总数: 952759
+耗时: 10.0042 s
+QPS: 95236 回显/s
+平均延迟: 9.956 ms
+最大延迟: 19.741 ms
+客户端 RSS: 3.65625 MB

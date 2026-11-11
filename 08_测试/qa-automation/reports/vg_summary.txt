@@ -1,0 +1,15 @@
+gateway probe exit=0 ; battle probe exit=0
+=== definitely lost / ERROR SUMMARY ===
+--- vg_gateway.log ---
+==81799==    definitely lost: 0 bytes in 0 blocks
+==81799==    indirectly lost: 0 bytes in 0 blocks
+==81799== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--- vg_gateway_b.log ---
+==81806==    definitely lost: 0 bytes in 0 blocks
+==81806==    indirectly lost: 0 bytes in 0 blocks
+==81806== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--- vg_battle.log ---
+==81807==    definitely lost: 0 bytes in 0 blocks
+==81807==    indirectly lost: 0 bytes in 0 blocks
+==81807== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Release gateway/battle 已恢复

@@ -1,0 +1,7 @@
+# step8 全量测试 Python 依赖（WSL2 Ubuntu-22.04, Python 3.10）
+pytest>=7.0.0
+redis>=4.5.0
+requests>=2.25.0
+PyYAML>=5.4
+allure-pytest>=2.13.0
+protobuf>=3.20.0

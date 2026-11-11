@@ -1,0 +1,14 @@
+-- users --
+1	user1
+2	user2
+-- redis keys --
+
+-- TCP 8001 --
+LISTEN 0      128           0.0.0.0:8001       0.0.0.0:*    users:(("game_gateway",pid=633,fd=5))    
+-- UDP 8002 --
+UNCONN 0      0             0.0.0.0:8002      0.0.0.0:*    users:(("battle_server",pid=634,fd=4))   
+-- gateway 日志 --
+[gateway] DB connected
+[gateway] listening on 0.0.0.0:8001
+-- battle 日志 --
+[battle] KCP/UDP listening on 0.0.0.0:8002

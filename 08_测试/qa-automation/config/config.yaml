@@ -1,0 +1,31 @@
+# step8 测试环境配置（WSL2 本机裸跑；账号为 demo 种子数据，非真实用户）
+env: local
+
+gateway:
+  host: 127.0.0.1
+  port: 8001          # TCP，4B 大端长度头 + protobuf body
+
+battle:
+  host: 127.0.0.1
+  port: 8002          # UDP，1B type 头 + protobuf body
+
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  database: cpp_game
+  user: root
+  password: ""        # 本机 demo 空密码；生产必须改（见基线 §4.5）
+
+redis:
+  host: 127.0.0.1
+  port: 6380          # 避让 Windows 本机占用的 6379
+  db: 0
+
+# 种子账号（schema.sql 内置；仅 demo，不收集真实用户数据）
+accounts:
+  seed:
+    - { username: user1, password: "123456", uid: 1 }
+    - { username: user2, password: "123456", uid: 2 }
+  invalid:
+    - { username: "nobody_xyz", password: "123456", case: "user_not_found" }
+    - { username: "user1", password: "wrongpass", case: "wrong_password" }

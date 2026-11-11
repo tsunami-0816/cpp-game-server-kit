@@ -1,0 +1,9 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/d/lg/project/工作流测试/projects/cpp-game-server-kit/08_测试/qa-automation
+configfile: pytest.ini
+testpaths: testcases
+plugins: allure-pytest-2.16.2
+collected 0 items
+
+========================= no tests collected in 0.30s ==========================

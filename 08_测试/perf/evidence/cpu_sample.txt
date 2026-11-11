@@ -1,0 +1,18 @@
+=== 服务端进程级 CPU/内存（压测中）pid=526 ===
+    PID %CPU %MEM NLWP COMMAND
+    526 16.6  0.0    4 echo_server
+=== 客户端进程级 CPU/内存 ===
+    PID %CPU %MEM NLWP COMMAND
+    531 36.0  0.0    1 stress_client
+=== 服务端各线程 top ===
+top - 23:45:32 up  4:31,  1 user,  load average: 0.83, 0.97, 0.76
+Threads:   4 total,   1 running,   3 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.4 us,  3.7 sy,  0.0 ni, 89.7 id,  0.0 wa,  0.0 hi,  6.2 si,  0.0 st
+MiB Mem :   7803.7 total,   2280.7 free,   1848.7 used,   3674.2 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   5740.0 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+    528 root      20   0   30928   3740   3248 S  18.8   0.0   0:00.33 echo_se+
+    529 root      20   0   30928   3740   3248 S  18.8   0.0   0:00.33 echo_se+
+    530 root      20   0   30928   3740   3248 R  12.5   0.0   0:00.32 echo_se+
+    526 root      20   0   30928   3740   3248 S   6.2   0.0   0:00.07 echo_se+

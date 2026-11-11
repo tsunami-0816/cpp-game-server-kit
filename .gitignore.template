@@ -1,0 +1,54 @@
+# .gitignore 模板
+# 每个项目复制后，按需调整
+
+# ===== 运行数据 =====
+.env
+.env.local
+.env.*.local
+*.log
+logs/
+
+# ===== 依赖 =====
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+
+# ===== 构建产物 =====
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+allure-report/
+allure-results/
+
+# ===== IDE / 编辑器 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== 数据库数据 =====
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== Docker 数据 =====
+# （如果用 docker-compose，数据卷不在项目目录里，不需要忽略）
+
+# ===== 临时文件 =====
+*.tmp
+*.bak
+.cache/

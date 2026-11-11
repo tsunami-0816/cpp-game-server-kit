@@ -1,0 +1,10 @@
+== TCP ==
+LISTEN 0      151         127.0.0.1:3306       0.0.0.0:*    users:(("mysqld",pid=287,fd=23))         
+LISTEN 0      128           0.0.0.0:8001       0.0.0.0:*    users:(("game_gateway",pid=70126,fd=5))  
+LISTEN 0      70          127.0.0.1:33060      0.0.0.0:*    users:(("mysqld",pid=287,fd=21))         
+== UDP ==
+UNCONN 0      0             0.0.0.0:8002      0.0.0.0:*    users:(("battle_server",pid=70127,fd=4)) 
+== redis ==
+PONG
+== mysql ==
+2

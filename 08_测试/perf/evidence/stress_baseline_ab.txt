@@ -1,0 +1,42 @@
+----- baseline round 1 -----
+[stress] target=127.0.0.1:8000 conn=1000 duration=10s
+[stress] connected=1000/1000
+=== stress_client 压测结果 ===
+成功连接: 1000
+中途断开: 0
+当前在线: 1000
+发包总数: 896000
+收包总数: 895465
+耗时: 10.0018 s
+QPS: 89529 回显/s
+平均延迟: 10.617 ms
+最大延迟: 35.846 ms
+客户端 RSS: 3.65625 MB
+----- baseline round 2 -----
+[stress] target=127.0.0.1:8000 conn=1000 duration=10s
+[stress] connected=1000/1000
+=== stress_client 压测结果 ===
+成功连接: 1000
+中途断开: 0
+当前在线: 1000
+发包总数: 871000
+收包总数: 870903
+耗时: 10.0065 s
+QPS: 87034 回显/s
+平均延迟: 10.903 ms
+最大延迟: 24.337 ms
+客户端 RSS: 3.65234 MB
+----- baseline round 3 -----
+[stress] target=127.0.0.1:8000 conn=1000 duration=10s
+[stress] connected=1000/1000
+=== stress_client 压测结果 ===
+成功连接: 1000
+中途断开: 0
+当前在线: 1000
+发包总数: 854000
+收包总数: 853865
+耗时: 10.0095 s
+QPS: 85305 回显/s
+平均延迟: 11.167 ms
+最大延迟: 22.473 ms
+客户端 RSS: 3.68359 MB

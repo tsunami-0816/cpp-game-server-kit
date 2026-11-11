@@ -1,0 +1,91 @@
+# ===== 敏感配置（真实本地配置不提交，仅保留模板）=====
+.env
+.env.local
+.env.*.local
+!.env.example.template
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+htmlcov/
+
+# ===== C++ 构建产物 =====
+05_代码/backend/build/
+05_代码/backend/build-asan/
+build/
+build-asan/
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# ===== 日志 / 运行数据 =====
+*.log
+logs/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+core
+core.*
+runtime/
+data/
+uploads/
+
+# ===== 测试报告生成产物（可由用例重新生成）=====
+allure-results/
+allure-report/
+08_测试/qa-automation/reports/html/
+
+# ===== 依赖 =====
+node_modules/
+
+# ===== IDE / 编辑器 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== 临时文件 =====
+*.tmp
+*.bak
+.cache/
+
+# ===== 一次性阶段探针脚本（生产线留痕，本地保留；不进公开仓）=====
+scripts/debug_gateway.sh
+scripts/test_echo.py
+scripts/test_bad_token.py
+scripts/test_battle.py
+scripts/n5_relogin.py
+scripts/step6_*
+scripts/test_matrix_cells.py
+scripts/test_matrix_empty.py
+scripts/step75_*
+scripts/step7_integration.py
+scripts/step7_observe_members.py
+scripts/step7_run.sh
+scripts/step9_precheck.sh
+scripts/step9_walkthrough.sh

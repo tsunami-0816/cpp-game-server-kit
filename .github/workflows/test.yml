@@ -1,0 +1,34 @@
+# 项目级 CI：pytest 用例收集性校验。
+# 说明：本项目集成/E2E 用例依赖本机常驻 MySQL(3306)/Redis(6380) 与已编译的 C++ 服务端，
+# GitHub Actions 环境无中间件、不编译 C++，因此 CI 只跑 `pytest --collect-only` 校验
+# 用例可被正常收集、无导入/语法/标记错误（保绿）；全量用例在本机 WSL2 执行，
+# 见 08_测试/qa-automation/run_pytest.sh 与 08_测试/全量测试用例清单.md。
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 08_测试/qa-automation
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Collect test cases (no middleware required)
+        env:
+          PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION: python
+        run: python3 -m pytest --collect-only -q

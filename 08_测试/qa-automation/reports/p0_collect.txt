@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/d/lg/project/工作流测试/projects/cpp-game-server-kit/08_测试/qa-automation
+configfile: pytest.ini
+testpaths: testcases
+plugins: allure-pytest-2.16.2
+collected 51 items / 44 deselected / 7 selected
+
+<Dir qa-automation>
+  <Dir testcases>
+    <Package l2_api>
+      <Module test_login_api.py>
+        <Function test_login_user1_success>
+        <Function test_login_user2_success>
+      <Module test_room_api.py>
+        <Function test_create_room_success>
+        <Function test_join_room_success>
+    <Package l3_integration>
+      <Module test_mysql_seed.py>
+        <Function test_seed_users_present>
+      <Module test_redis_session.py>
+        <Function test_session_written_after_login>
+    <Package l4_e2e>
+      <Module test_main_flow.py>
+        <Function test_main_flow_login_room_frame_rejoin>
+
+================ 7/51 tests collected (44 deselected) in 1.47s =================

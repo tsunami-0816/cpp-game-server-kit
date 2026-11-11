@@ -1,0 +1,1 @@
+DEL session:* 影响键数=0；DEL room:* 影响键数=0

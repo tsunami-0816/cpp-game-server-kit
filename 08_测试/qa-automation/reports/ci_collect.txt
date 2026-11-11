@@ -1,0 +1,78 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/d/lg/project/工作流测试/projects/cpp-game-server-kit/08_测试/qa-automation
+configfile: pytest.ini
+testpaths: testcases
+plugins: allure-pytest-2.16.2
+collected 51 items
+
+<Dir qa-automation>
+  <Dir testcases>
+    <Package l1_unit>
+      <Module test_codec_header.py>
+        <Function test_encode_big_endian_length_prefix>
+        <Function test_decode_rejects_truncated_header>
+        <Function test_decode_rejects_zero_length>
+        <Function test_decode_rejects_oversize_body>
+        <Function test_decode_accepts_valid_length>
+      <Module test_error_codes.py>
+        <Function test_gateway_error_codes_present>
+        <Function test_battle_error_codes_present>
+        <Function test_room_capacity_threshold_is_50>
+      <Module test_hash_scheme.py>
+        <Function test_seed_hash_matches_scheme[user1-salt1-123456-55baa6968eec5d9d7117c507fb2aa381cfd9c85e018733020b7ad58a21f7388c]>
+        <Function test_seed_hash_matches_scheme[user2-salt2-123456-63e48047827db95821f831780355ecaf617d1ca69474c4a39f8902d24fa3a5e6]>
+        <Function test_wrong_password_produces_different_hash>
+        <Function test_hash_is_not_plaintext>
+      <Module test_proto_roundtrip.py>
+        <Function test_login_req_roundtrip>
+        <Function test_login_rsp_roundtrip>
+        <Function test_join_room_rsp_repeated_members>
+        <Function test_frame_input_roundtrip>
+        <Function test_rejoin_rsp_history_repeated>
+      <Module test_token_format.py>
+        <Function test_valid_64_hex_token>
+        <Function test_invalid_token_rejected[]>
+        <Function test_invalid_token_rejected[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]>
+        <Function test_invalid_token_rejected[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]>
+        <Function test_invalid_token_rejected[gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg]>
+        <Function test_invalid_token_rejected[ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ]>
+        <Function test_invalid_token_rejected[ab-cdeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee]>
+    <Package l2_api>
+      <Module test_authz_api.py>
+        <Function test_token_uid_mismatch_rejected>
+        <Function test_relogin_overrides_old_token>
+        <Function test_members_dedup_by_uid>
+        <Function test_frame_input_requires_auth>
+      <Module test_login_api.py>
+        <Function test_login_user1_success>
+        <Function test_login_user2_success>
+        <Function test_login_user_not_found>
+        <Function test_login_wrong_password>
+        <Function test_login_empty_username_is_rejected>
+        <Function test_login_empty_password_is_rejected>
+        <Function test_login_sql_injection_probe_rejected>
+        <Function test_login_response_fast_on_local_loopback>
+      <Module test_room_api.py>
+        <Function test_create_room_success>
+        <Function test_join_room_success>
+        <Function test_create_room_bad_token_rejected>
+        <Function test_join_room_bad_token_rejected>
+        <Function test_rejoin_room_bad_token_rejected>
+        <Function test_join_nonexistent_room>
+        <Function test_rejoin_nonexistent_room>
+        <Function test_room_full_branch_threshold_is_50>
+    <Package l3_integration>
+      <Module test_mysql_seed.py>
+        <Function test_seed_users_present>
+        <Function test_seed_hash_and_salt_nonempty>
+        <Function test_table_collation_utf8mb4>
+      <Module test_redis_session.py>
+        <Function test_session_written_after_login>
+        <Function test_session_overwritten_on_relogin>
+        <Function test_no_session_residue_after_fixture_cleanup>
+    <Package l4_e2e>
+      <Module test_main_flow.py>
+        <Function test_main_flow_login_room_frame_rejoin>
+
+========================= 51 tests collected in 1.69s ==========================

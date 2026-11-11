@@ -1,0 +1,44 @@
+{
+  "target": "gateway login TCP 8001",
+  "results": [
+    {
+      "concurrency": 10,
+      "duration_s": 10.0,
+      "total_requests": 7019,
+      "success": 7019,
+      "business_fail": 0,
+      "exception": 0,
+      "error_rate": 0.0,
+      "tps": 701.9,
+      "avg_rt_ms": 14.24,
+      "p95_rt_ms": 21.72,
+      "max_rt_ms": 28.3
+    },
+    {
+      "concurrency": 20,
+      "duration_s": 10.0,
+      "total_requests": 5334,
+      "success": 5334,
+      "business_fail": 0,
+      "exception": 0,
+      "error_rate": 0.0,
+      "tps": 533.4,
+      "avg_rt_ms": 37.54,
+      "p95_rt_ms": 47.1,
+      "max_rt_ms": 58.64
+    },
+    {
+      "concurrency": 50,
+      "duration_s": 10.0,
+      "total_requests": 5360,
+      "success": 5360,
+      "business_fail": 0,
+      "exception": 0,
+      "error_rate": 0.0,
+      "tps": 536.0,
+      "avg_rt_ms": 93.68,
+      "p95_rt_ms": 107.92,
+      "max_rt_ms": 131.37
+    }
+  ]
+}

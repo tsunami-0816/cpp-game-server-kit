@@ -1,0 +1,27 @@
+=== P0 台账 7 条 ===
+  P0-001 [L2] user1 登录成功返回 token
+  P0-002 [L2] user2 登录成功返回 token
+  P0-003 [L2] 登录用户创建房间成功
+  P0-004 [L2] 双人进房成员列表双方在册
+  P0-005 [L3] MySQL 种子用户 id=1/2 在册
+  P0-006 [L3] 登录后 Redis session 落盘且值一致、TTL 非永久
+  P0-007 [L4] E2E 主链路：登录→建房→双人进房→发帧→广播→断线重连
+
+=== pytest 输出 ===
+============================= test session starts ==============================
+platform linux -- Python 3.10.12, pytest-9.2.0, pluggy-1.7.0
+rootdir: /mnt/d/lg/project/工作流测试/projects/cpp-game-server-kit/08_测试/qa-automation
+configfile: pytest.ini
+testpaths: testcases
+plugins: allure-pytest-2.16.2
+collected 51 items / 44 deselected / 7 selected
+
+testcases/l2_api/test_login_api.py ..                                    [ 28%]
+testcases/l2_api/test_room_api.py ..                                     [ 57%]
+testcases/l3_integration/test_mysql_seed.py .                            [ 71%]
+testcases/l3_integration/test_redis_session.py .                         [ 85%]
+testcases/l4_e2e/test_main_flow.py .                                     [100%]
+
+======================= 7 passed, 44 deselected in 2.54s =======================
+
+=== P0 回归结论：exit=0 ===

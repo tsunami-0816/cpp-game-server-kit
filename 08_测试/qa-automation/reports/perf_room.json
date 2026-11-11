@@ -1,0 +1,28 @@
+{
+  "clients": 50,
+  "frame_phase_s": 10.0,
+  "create_room_code": 0,
+  "room_id": 1024,
+  "join": {
+    "elapsed_s": 0.094,
+    "code_distribution": {
+      "0": 49
+    },
+    "success": 49,
+    "failed": 0
+  },
+  "frames": {
+    "total_sent": 4950,
+    "segments_received": 25052,
+    "frame_send_rate_per_s": 495.0
+  },
+  "reconnect": {
+    "code": 0,
+    "recovery_ms": 1.3
+  },
+  "cpu": {
+    "before": "0.2    4",
+    "during/after": "0.3    4"
+  },
+  "boundary": "广播应用层 P99 延迟：裸 UDP 客户端只见 KCP 封装段，无法解出应用层帧时间戳，未验证。"
+}

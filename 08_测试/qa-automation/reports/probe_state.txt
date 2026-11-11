@@ -1,0 +1,16 @@
+bin game_gateway: mtime=00:47:38 size=154088
+bin battle_server: mtime=02:37:34 size=170336
+bin echo_server: mtime=00:16:20 size=41520
+bin bench_queue: mtime=00:16:20 size=23392
+bin stress_client: mtime=00:16:20 size=28112
+src threshold line 152: } else if (it->second.members.size() >= 50) {  // 修复-Q014：满员阈值对齐基线 M5/架构 §5.3 契约 50 人（原硬编码 8）
+--- ports ---
+LISTEN 0      151         127.0.0.1:3306       0.0.0.0:*    users:(("mysqld",pid=287,fd=23))         
+LISTEN 0      128           0.0.0.0:8001       0.0.0.0:*    users:(("game_gateway",pid=59898,fd=5))  
+LISTEN 0      70          127.0.0.1:33060      0.0.0.0:*    users:(("mysqld",pid=287,fd=21))
+UNCONN 0      0             0.0.0.0:8002      0.0.0.0:*    users:(("battle_server",pid=59899,fd=4))
+--- mysql users ---
+1	user1
+2	user2
+--- redis keys ---
+

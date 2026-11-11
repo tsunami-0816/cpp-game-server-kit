@@ -1,0 +1,115 @@
+{
+  "pytest==9.2.0": {
+    "vulns": []
+  },
+  "redis==8.1.0": {
+    "vulns": []
+  },
+  "requests==2.25.1": {
+    "vulns": [
+      {
+        "id": "GHSA-9hjg-9r4m-mvj7",
+        "aliases": [
+          "CVE-2024-47081",
+          "PYSEC-2026-1872"
+        ],
+        "summary": "Requests vulnerable to .netrc credentials leak via malicious URLs",
+        "severity": [
+          "CVSS_V3"
+        ],
+        "fixed": []
+      },
+      {
+        "id": "GHSA-9wx4-h78v-vm56",
+        "aliases": [
+          "CVE-2024-35195",
+          "PYSEC-2026-1873"
+        ],
+        "summary": "Requests `Session` object does not verify requests after making first request with verify=False",
+        "severity": [
+          "CVSS_V3"
+        ],
+        "fixed": []
+      },
+      {
+        "id": "GHSA-gc5v-m9x4-r6x2",
+        "aliases": [
+          "CVE-2026-25645",
+          "PYSEC-2026-2275"
+        ],
+        "summary": "Requests has Insecure Temp File Reuse in its extract_zipped_paths() utility function",
+        "severity": [
+          "CVSS_V3"
+        ],
+        "fixed": []
+      },
+      {
+        "id": "GHSA-j8r2-6x86-q33q",
+        "aliases": [
+          "CVE-2023-32681",
+          "PYSEC-2023-74"
+        ],
+        "summary": "Unintended leak of Proxy-Authorization header in requests",
+        "severity": [
+          "CVSS_V3"
+        ],
+        "fixed": []
+      },
+      {
+        "id": "PYSEC-2023-74",
+        "aliases": [
+          "CVE-2023-32681",
+          "GHSA-j8r2-6x86-q33q"
+        ],
+        "summary": "",
+        "severity": [],
+        "fixed": []
+      },
+      {
+        "id": "PYSEC-2026-1872",
+        "aliases": [
+          "CVE-2024-47081",
+          "GHSA-9hjg-9r4m-mvj7"
+        ],
+        "summary": "Requests vulnerable to .netrc credentials leak via malicious URLs",
+        "severity": [
+          "CVSS_V3"
+        ],
+        "fixed": []
+      },
+      {
+        "id": "PYSEC-2026-1873",
+        "aliases": [
+          "CVE-2024-35195",
+          "GHSA-9wx4-h78v-vm56"
+        ],
+        "summary": "Requests `Session` object does not verify requests after making first request with verify=False",
+        "severity": [
+          "CVSS_V3"
+        ],
+        "fixed": []
+      },
+      {
+        "id": "PYSEC-2026-2275",
+        "aliases": [
+          "CVE-2026-25645",
+          "GHSA-gc5v-m9x4-r6x2"
+        ],
+        "summary": "",
+        "severity": [
+          "CVSS_V3"
+        ],
+        "fixed": []
+      }
+    ]
+  },
+  "PyYAML==5.4.1": {
+    "vulns": []
+  },
+  "allure-pytest==2.16.2": {
+    "vulns": []
+  },
+  "protobuf==7.36.2": {
+    "vulns": []
+  }
+}

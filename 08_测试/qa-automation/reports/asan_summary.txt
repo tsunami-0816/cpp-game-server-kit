@@ -1,0 +1,4 @@
+gateway probe exit=0 ; battle probe exit=0
+=== ASan 错误扫描（AddressSanitizer / ERROR / leak）===
+=== 扫描结束（无输出即未检出 ASan 错误）===
+Release gateway/battle 已恢复

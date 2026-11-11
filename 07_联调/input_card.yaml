@@ -1,0 +1,67 @@
+# step7 全链路联调 · 输入卡（指针式，详细信息按需读引用文件）
+step: 7
+project: cpp-game-server-kit
+generated_by: step6.5
+generated_at: 2026-11-11
+
+# 环境：WSL2 Ubuntu；纯 C++ 后端，无前端、无 Docker
+runtime:
+  os: WSL2 Ubuntu
+  db:
+    mysql: 127.0.0.1:3306 (root 空密码, 库 cpp_game)
+    redis: 127.0.0.1:6380 (无密码；6379 被 Windows 本机 Redis 占用，避让)
+  ports:
+    echo_tcp: 8000
+    gateway_tcp: 8001
+    battle_udp_kcp: 8002
+
+# 契约引用（step6.5 已对账通过，0 臆造消息）
+contract:
+  proto_snapshot: 06.5_契约/proto_game.proto
+  check_record: 06.5_契约/契约校验记录.md
+  evidence: 06.5_契约/evidence/proto_contract_check.log
+
+# 核心端到端链路（联调清单逐条覆盖）
+chains:
+  - id: L1-login
+    desc: TCP 8001 发 LoginReq → MySQL 查 user → sha256(salt+pwd) 比对 → Redis SET session:{uid} TTL 7200 → LoginRsp(code=0,token,uid)
+    expect: code=0；token 64 位；Redis 可读 session:{uid}
+  - id: L2-create-room
+    desc: KCP 8002 type=1 CreateRoomReq(token,uid) → checkToken 比对 Redis session:{uid} → type=2 CreateRoomRsp
+    expect: code=0，room_id 自增（起步 1000）
+  - id: L3-join-room
+    desc: type=3 JoinRoomReq(token,room_id,uid) → 校验 token/房间存在/未满员 → type=4 JoinRoomRsp(members)
+    expect: code=0，members 含双方 uid
+  - id: L4-frame-sync
+    desc: type=5 FrameInput(room_id,uid,input) 入房间历史(最近 100 条) → 100ms tick 广播 type=6 FrameBroadcast(frame_no,inputs)
+    expect: 房间成员收到广播段，inputs 与上报一致
+  - id: L5-rejoin
+    desc: 断线后 type=7 RejoinRoomReq(token,room_id,uid) → type=8 RejoinRoomRsp(frame_no,history)
+    expect: code=0，frame_no 连续，history 为未广播积压帧
+  - id: L6-errors
+    desc: 异常分支：伪造/空 token→1003；不存在房间→2001；不存在用户→1001；密码错→1002；满员→2002
+    expect: 错误码与契约 §5.3 一致（见契约记录 §4）
+
+# 台账提醒（本步只修来源阶段=7 的 open P0/P1；以下为既有遗留，不要在 step7 擅自改）
+ledger_watch:
+  open:
+    - Q-014: 满员阈值代码 8，应对齐基线 M5 的 50 人；归属 step5A，step8 压测前改，本步不动
+  deferred:
+    - Q-009: 3001/4001/4002 响应包未出（解码层断连防护已存在），step8 健壮性补齐
+    - Q-013: 房间/成员/帧历史未落 Redis，重启丢失
+    - Q-015: test_battle.py 陈旧脚本，step8 清理或改写
+    - Q-001/Q-002/Q-003/Q-004/Q-011/Q-012: 见 _问题台账.md 遗留归档
+
+# 收敛判据
+exit_criteria:
+  - 上述 L1–L6 链路在 WSL2 真实走查通过，证据落 07_联调/
+  - 台账「来源阶段=7」无 open/fixed 残留 P0/P1
+  - 每条 P1 标 verified 前先跑 scripts/log_failure.py 记 _失败日志.md
+  - 轮次日志记录本轮 open P0/P1 数，单调不增
+
+# 必读文件（≤3）
+must_read:
+  - _项目状态.md
+  - 07_联调/input_card.yaml
+  - _问题台账.md
+# 选读：06.5_契约/契约校验记录.md（查消息/错误码时）；05_代码/backend/src/gateway/main_gateway.cpp、src/battle/main_battle.cpp

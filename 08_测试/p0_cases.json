@@ -1,0 +1,62 @@
+{
+  "project": "cpp-game-server-kit",
+  "protocol_note": "本项目为自定义 TCP/UDP + Protobuf 二进制协议（网关 4B 大端长度头，战斗服 1B type 头），非 HTTP/JSON。仓库通用 scripts/p0_regression_test.py 面向 REST 接口，不适用；P0 回归由 qa-automation/p0_runner.py 调用 pytest -m p0 执行，本文件为 P0 用例台账与断言点对照。",
+  "cases": [
+    {
+      "id": "P0-001",
+      "name": "user1 登录成功返回 token",
+      "layer": "L2",
+      "test_node": "testcases/l2_api/test_login_api.py::test_login_user1_success",
+      "protocol": "TCP 8001 LoginReq/LoginRsp",
+      "assertions": ["code=0", "uid=1", "token 为 64 位十六进制", "msg=ok"]
+    },
+    {
+      "id": "P0-002",
+      "name": "user2 登录成功返回 token",
+      "layer": "L2",
+      "test_node": "testcases/l2_api/test_login_api.py::test_login_user2_success",
+      "protocol": "TCP 8001 LoginReq/LoginRsp",
+      "assertions": ["code=0", "uid=2", "token 为 64 位十六进制"]
+    },
+    {
+      "id": "P0-003",
+      "name": "登录用户创建房间成功",
+      "layer": "L2",
+      "test_node": "testcases/l2_api/test_room_api.py::test_create_room_success",
+      "protocol": "UDP 8002 CreateRoomReq/CreateRoomRsp",
+      "assertions": ["code=0", "room_id>=1000"]
+    },
+    {
+      "id": "P0-004",
+      "name": "双人进房成员列表双方在册",
+      "layer": "L2",
+      "test_node": "testcases/l2_api/test_room_api.py::test_join_room_success",
+      "protocol": "UDP 8002 JoinRoomReq/JoinRoomRsp",
+      "assertions": ["code=0", "members 含 uid=1 与 uid=2"]
+    },
+    {
+      "id": "P0-005",
+      "name": "MySQL 种子用户 id=1/2 在册",
+      "layer": "L3",
+      "test_node": "testcases/l3_integration/test_mysql_seed.py::test_seed_users_present",
+      "protocol": "MySQL cpp_game.users 只读断言",
+      "assertions": ["行数=2", "id/username 与种子一致"]
+    },
+    {
+      "id": "P0-006",
+      "name": "登录后 Redis session 落盘且值一致、TTL 非永久",
+      "layer": "L3",
+      "test_node": "testcases/l3_integration/test_redis_session.py::test_session_written_after_login",
+      "protocol": "Redis 6380 session:{uid}",
+      "assertions": ["session 值==token", "7190<=TTL<=7200"]
+    },
+    {
+      "id": "P0-007",
+      "name": "E2E 主链路：登录→建房→双人进房→发帧→广播→断线重连",
+      "layer": "L4",
+      "test_node": "testcases/l4_e2e/test_main_flow.py::test_main_flow_login_room_frame_rejoin",
+      "protocol": "TCP 8001 + UDP 8002 全链路",
+      "assertions": ["建房 code=0", "进房 members 双方在册", "收到 KCP 广播段", "重连 code=0 且 frame_no>=0", "重连后新会话可收到后续广播段"]
+    }
+  ]
+}

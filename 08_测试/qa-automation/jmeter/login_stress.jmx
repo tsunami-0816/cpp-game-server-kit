@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  JMeter 登录接口压测骨架（交叉验证用）。
+  说明：
+  - 本项目为自定义 TCP(4B 大端长度头) + Protobuf body，登录请求体含动态 protobuf 序列化，
+    无法在 JMeter TCP Sampler 内静态构造；本机 WSL 未安装 JMeter（command not found）。
+  - 本轮正式压测以 qa-automation/perf_test.py（Python 多线程）为准，见 reports/perf_login.json。
+  - 本 JMX 仅提供线程组模型与聚合报告骨架，供安装 JMeter 5.x 的环境复跑交叉对照；
+    若要真实发登录包，需在beanshell/jsr223 采样器内用 Python 等价逻辑构造 protobuf 字节，
+    或替换为对网关 HTTP 网关层的 HTTP Sampler（当前 MVP 无 HTTP 层）。
+  目标：127.0.0.1:8001；并发档位 10 / 20 / 50；每档持续 10s。
+-->
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="登录接口压测" enabled="true">
+      <stringProp name="TestPlan.comments">cpp-game-server-kit 登录接口 A/B 交叉验证骨架</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="并发线程组" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">200</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">20</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">10</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConfigTestElement guiclass="tcpconfiggui" testclass="TCPPerfTestSampler" testname="TCP 配置" enabled="true">
+          <stringProp name="TCPSampler.server">127.0.0.1</stringProp>
+          <stringProp name="TCPSampler.port">8001</stringProp>
+          <stringProp name="TCPSampler.timeout">3000</stringProp>
+          <boolProp name="TCPSampler.closeConnection">true</boolProp>
+          <stringProp name="TCPSampler.reUseConnection">false</stringProp>
+          <stringProp name="TCPSampler.nodelay">true</stringProp>
+          <stringProp name="TCPSampler.handshakeTimeout">0</stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <TCPSampler guiclass="tcpSamplerGui" testclass="TCPSampler" testname="登录请求(占位 protobuf 字节)" enabled="true">
+          <stringProp name="TCPSampler.server">127.0.0.1</stringProp>
+          <stringProp name="TCPSampler.port">8001</stringProp>
+          <stringProp name="TCPSampler.timeout">3000</stringProp>
+          <boolProp name="TCPSampler.closeConnection">true</boolProp>
+          <stringProp name="TCPSampler.reUseConnection">false</stringProp>
+          <stringProp name="TCPSampler.nodelay">true</stringProp>
+          <stringProp name="TCPSampler.BE">false</stringProp>
+          <stringProp name="TCPSampler.encoding">UTF-8</stringProp>
+          <stringProp name="TCPSampler.request"><!-- 占位：实际 protobuf 登录体由 perf_test.py 构造 --></stringProp>
+          <stringProp name="TCPSampler.source"/>
+          <stringProp name="TCPSampler.c0"/>
+          <stringProp name="TCPSampler.c1"/>
+          <stringProp name="TCPSampler.c2"/>
+        </TCPSampler>
+        <hashTree>
+          <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="聚合报告" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time><latency>true</latency><timestamp>true</timestamp>
+                <success>true</success><label>true</true><code>true</true><message>true</message>
+                <threadName>true</threadName><dataType>true</dataType><encoding>false</encoding>
+                <assertions>false</assertions><subresults>false</subresults><responseData>false</responseData>
+                <samplerData>false</samplerData><xml>false</xml><fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders><requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseData><saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave><bytes>true</bytes><sentBytes>true</sentBytes>
+                <threadCounts>true</threadCounts><idleTime>true</idleTime><connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"/>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
